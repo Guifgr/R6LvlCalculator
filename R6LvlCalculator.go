@@ -60,10 +60,9 @@ func nextStep() {
 	bufio.NewReader(os.Stdin).ReadBytes('\n')
 	CallClear() //function to clear the console or terminal
 }
-
-func main() {
-	CallClear() //function to clear the console or terminal
-	var nivelAtual, nivelDesejado, valorVenda, nivelDeVenda int
+func xpNecessario() {
+	CallClear()
+	var nivelAtual, nivelDesejado int
 	fmt.Printf("Seja bem vindo!\n\nSe quiser descobrir quantos XP precisa para subir até determinado nível\n")
 	fmt.Printf("Vamos apenas precisar que nos próximos passos você digite seu nível atual e em que nível quer chegar\n")
 	nextStep()
@@ -84,6 +83,11 @@ func main() {
 	fmt.Println("e precisa de", xpNecessario, "xp para alcançar seu objetivo")
 	bufio.NewReader(os.Stdin).ReadBytes('\n')
 	nextStep()
+}
+
+func calcPreco() {
+	var nivelAtual, nivelDesejado, valorVenda, nivelDeVenda int
+	CallClear()
 	fmt.Println("Vamos calcular quanto vale o que você upou da conta")
 	fmt.Println("Primeiro vamos precisar saber por quanto a conta vai ser vendida e em que nível")
 	nextStep()
@@ -124,4 +128,39 @@ func main() {
 	fmt.Printf("O valor justo para você receber pelo que você upou é de R$%.2f\n", valorSerPago)
 	bufio.NewReader(os.Stdin).ReadBytes('\n')
 	nextStep()
+}
+
+func main() {
+	CallClear() //function to clear the console or terminal
+	var opcao, finalizar int
+	for {
+		CallClear()
+		fmt.Println("Você quer calcular o quanto de XP precisa pra chegar até o nível ou deseja calcular o preço dos níveis que upou?")
+		fmt.Println("Para calcular o quanto falta de XP digite 0")
+		fmt.Println("Para calcular o preço digite 1")
+		fmt.Scan(&opcao)
+		if opcao == 0 {
+			xpNecessario()
+			CallClear()
+			fmt.Println("Deseja continuar?")
+			fmt.Println("Se sim 0 se não 1")
+			fmt.Scan(&finalizar)
+			if finalizar == 1 {
+				break
+			}
+		} else if opcao == 1 {
+			calcPreco()
+			fmt.Println("Deseja continuar?")
+			fmt.Println("Se sim 0 se não 1")
+			fmt.Scan(&finalizar)
+			if finalizar == 1 {
+				break
+			}
+		} else {
+			CallClear()
+			fmt.Println("Você é burro cara?")
+			bufio.NewReader(os.Stdin).ReadBytes('\n')
+			nextStep()
+		}
+	}
 }
