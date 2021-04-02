@@ -121,6 +121,7 @@ func main() {
 	} else {
 		valorSerPago = 0
 	}
-	fmt.Printf("O valor justo para você receber pelo que você upou é de R$%.2f", valorSerPago)
+	fmt.Printf("O valor justo para você receber pelo que você upou é de R$%.2f\n", valorSerPago)
+	bufio.NewReader(os.Stdin).ReadBytes('\n')
 	nextStep()
 }
