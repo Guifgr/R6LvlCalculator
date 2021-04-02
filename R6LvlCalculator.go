@@ -69,9 +69,15 @@ func main() {
 	nextStep()
 	fmt.Printf("Agora digite em que nível você está!\n\nDigite o nível:  ")
 	fmt.Scan(&nivelAtual)
+	if nivelAtual < 0 {
+		nivelAtual = 0
+	}
 	CallClear() //function to clear the console or terminal
 	fmt.Printf("Agora digite em que nível quer chegar!\n\nDigite o nível:  ")
 	fmt.Scan(&nivelDesejado)
+	if nivelDesejado < 0 {
+		nivelDesejado = 0
+	}
 	xpNecessario := calcularXp(int(nivelAtual), int(nivelDesejado))
 	CallClear() //function to clear the console or terminal
 	fmt.Println("Você precisa upar do nível", nivelAtual, "ao", nivelDesejado, "=", nivelDesejado-nivelAtual)
@@ -83,20 +89,37 @@ func main() {
 	nextStep()
 	fmt.Printf("Qual o valor de venda da conta?\n")
 	fmt.Scan(&valorVenda)
+	if valorVenda < 0 {
+		valorVenda = 0
+	}
 	CallClear()
 	fmt.Printf("Em qual nivel a conta vai ser vendida?\n")
 	fmt.Scan(&nivelDeVenda)
+	if nivelDeVenda < 0 {
+		nivelDeVenda = 0
+	}
 	valorPorXp := float32(valorVenda) / float32(somaXpAcumulado(int(nivelDeVenda)))
 	CallClear()
 	fmt.Println("Você pegou a conta em que nível?")
 	fmt.Scan(&nivelAtual)
+	if nivelAtual < 0 {
+		nivelAtual = 0
+	}
 	CallClear()
 	fmt.Println("Você upou até de que nivel?")
 	fmt.Scan(&nivelDesejado)
+	if nivelDesejado < 0 {
+		nivelDesejado = 0
+	}
 	if nivelDesejado > nivelDeVenda {
 		nivelDesejado = nivelDeVenda
 	}
 	CallClear()
-	valorSerPago := float32(calcularXp(int(nivelAtual), int(nivelDesejado))) * valorPorXp
-	fmt.Printf("O valor justo para você receber pelos nivels que você upou é de R$%.2f", valorSerPago)
+	var valorSerPago float32
+	if nivelAtual >= 0 && nivelDesejado >= 0 && valorPorXp > 0 {
+		valorSerPago = float32(calcularXp(int(nivelAtual), int(nivelDesejado))) * valorPorXp
+	} else {
+		valorSerPago = 0
+	}
+	fmt.Printf("O valor justo para você receber pelo que você upou é de R$%.2f", valorSerPago)
 }
